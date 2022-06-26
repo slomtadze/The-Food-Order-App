@@ -33,12 +33,12 @@ const DUMMY_MEALS = [
 const AvialableMeals = () => {
     const mealItem = DUMMY_MEALS.map(item => 
         <MealItem 
-            key={item.id} 
-            title={item.name}
-            description={item.description}
-            price={item.price}
+          id={item.id}
+          key={item.id} 
+          title={item.name}
+          description={item.description}
+          price={item.price}
     />)
-
   return (
     <div className={classes.meals}>
        <Card>{mealItem}</Card>

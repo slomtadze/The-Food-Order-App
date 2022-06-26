@@ -1,9 +1,9 @@
 import React from 'react';
 import Classes from './HeaderCartButton.module.css'
 
-const HeaderCartButton = () => {
+const HeaderCartButton = (props) => {
   return (
-    <button className={Classes.button}>
+    <button className={Classes.button} onClick={props.onClick}>
         <div className={Classes.icon}>
             <svg
                 xmlns='http://www.w3.org/2000/svg'

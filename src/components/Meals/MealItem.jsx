@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import MealForm from './MealForm/MealForm'
 import classes from './MealItem.module.css'
 
@@ -11,7 +11,7 @@ const MealItem = (props) => {
             <span className={classes.price}>{`$${props.price}`}</span>
         </div>
         <div>
-            <MealForm />
+            <MealForm id={props.id}/>
         </div>
     </li>
   )

@@ -1,12 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Input from '../../UI/Input';
 import classes from './MealForm.module.css'
 
 const MealForm = (props) => {
   return (
     <form className={classes.form}>
-        <Input form={{
-          id: 'amount',
+        <Input label='Amount' form={{
+          id: `${props.id}`,
           type: 'number',
           min: '1',
           max: '5',

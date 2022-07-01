@@ -10,13 +10,23 @@ const Cart = (props) => {
 
     const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`
 
+    const itemCountIncreaseHandler = (id) => {
+        
+    }
+
+    const itemCountDecreaseHandler = (id) => {
+
+    }
+
     const hasItems = cartCtx.items.length > 0
     const cartItem = <ul className={classes['cart-items']}>{cartCtx.items.map(item => 
             <CartItem 
                 key = {item.id}
                 name = {item.name}
                 price = {item.price}
-                amount = {totalAmount}
+                amount = {item.amount}
+                onAdd = {itemCountIncreaseHandler}
+                onRemove = {itemCountDecreaseHandler}
             /> 
         )}
     </ul>
@@ -25,7 +35,7 @@ const Cart = (props) => {
         {cartItem}
         <div className={classes.total}>
             <span>Total Amount</span>
-            <span>35</span>
+            <span>{totalAmount}</span>
         </div>
         <div className={classes.actions}>
             <button className={classes['button--alt']} onClick={props.onHideCart}>Close</button>

@@ -1,18 +1,37 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import CartContext from '../../Store/Cart-Context';
 import Classes from './HeaderCartButton.module.css'
 
 const HeaderCartButton = (props) => {
 
-  const cartCtx = useContext(CartContext)
+  const [bump, setBump] = useState(false) 
 
-  const numberOfCartItems = cartCtx.items.reduce((curr, item) => {
+  const cartCtx = useContext(CartContext)
+  const { items } = cartCtx;
+
+  const numberOfCartItems = items.reduce((curr, item) => {
     return curr + item.amount;
   }, 0)
 
+  const btnClasses = `${Classes.button} ${bump ? Classes.bump: ''}`
+
+    
+    useEffect(() => {
+
+    if(items.length > 0){
+      setBump(true);
+    }  
+    const timer = setTimeout(() => {
+        setBump(false)
+      }, 300);
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [items])
 
   return (
-    <button className={Classes.button} onClick={props.onClick}>
+    <button className={btnClasses} onClick={props.onClick}>
         <div className={Classes.icon}>
             <svg
                 xmlns='http://www.w3.org/2000/svg'

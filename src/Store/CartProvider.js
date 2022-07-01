@@ -8,9 +8,28 @@ const defaulcCartItem = {
 
 const cartReducer = (state, action) => {
     if(action.type === 'ADD') {
-        const updatedCartItems = state.items.concat(action.item);
         const updatedToTalAmount = state.totalAmount + action.item.price * action.item.amount;
-        return {items: updatedCartItems, totalAmount: updatedToTalAmount}
+        
+        const existingItemIndex = state.items.findIndex( item => item.id === action.item.id);
+        const existngItem = state.items[existingItemIndex]
+        let updatedItem ;
+        let updatedItems
+
+        if(existngItem) {
+            updatedItem = {
+                ...existngItem,
+                amount: existngItem.amount + action.item.amount
+            }
+            updatedItems = [...state.items];
+            updatedItems[existingItemIndex] = updatedItem; 
+        } else {
+            updatedItems = state.items.concat(action.item);
+        }    
+               
+        return {
+            items: updatedItems, 
+            totalAmount: updatedToTalAmount
+        }
     }
 
     return defaulcCartItem

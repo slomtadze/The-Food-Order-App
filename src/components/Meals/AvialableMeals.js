@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import MealItem from './MealItem';
 import classes from './AvailableMeals.module.css' 
 import Card from '../UI/Card';
+import useHttp from '../Hooks/use-http';
 
-const DUMMY_MEALS = [
+/* const DUMMY_MEALS = [
     {
       id: 'm1',
       name: 'Sushi',
@@ -28,10 +29,36 @@ const DUMMY_MEALS = [
       description: 'Healthy...and green...',
       price: 18.99,
     },
-  ];
+  ]; */
 
 const AvialableMeals = () => {
-    const mealItem = DUMMY_MEALS.map(item => 
+
+    const [meals, setMeals] = useState([])
+
+    const { isLoading, error, sendRequest: fetchMeals } = useHttp()
+
+    const applyMeals = (meals) => {
+
+      const loadedMeals = [];
+
+      for(const key in meals){
+        loadedMeals.push({
+          id:key,
+          name: meals[key].name,
+          description: meals[key].description,
+          price: meals[key].price
+        })
+      }
+      setMeals(loadedMeals)
+    }
+
+    useEffect(() => {
+      fetchMeals(
+        {url: 'https://react---udemy-default-rtdb.firebaseio.com/Meals.json'},
+        applyMeals)
+  }, [])
+
+    const mealItem = meals.map(item => 
         <MealItem 
           id={item.id}
           key={item.id} 
@@ -39,6 +66,14 @@ const AvialableMeals = () => {
           description={item.description}
           price={item.price}
     />)
+
+    if(isLoading){
+      return (
+        <Card>
+          <p>Is Loading...</p>
+        </Card>
+      )
+    }
   return (
     <div className={classes.meals}>
        <Card>{mealItem}</Card>

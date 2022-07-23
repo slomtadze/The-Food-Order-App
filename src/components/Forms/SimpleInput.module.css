@@ -5,10 +5,15 @@
     max-width: 20rem;
     margin-bottom: 0.5rem;
 }
+
 .form label {
     font-weight: bold;
     color: #363636;
     margin-right: 0.5rem;
+}
+
+.invalid input {
+    background-color: rgb(242, 71, 71);
 }
 
 .form input {

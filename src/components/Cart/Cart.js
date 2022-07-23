@@ -3,6 +3,7 @@ import CartContext from '../../Store/Cart-Context'
 import Modal from '../UI/Modal'
 import classes from './Cart.module.css'
 import CartItem from './CartItem'
+import BasicForm from '../Forms/BasicForm'
 
 const Cart = (props) => {
 
@@ -37,6 +38,7 @@ const Cart = (props) => {
             <span>Total Amount</span>
             <span>{totalAmount}</span>
         </div>
+        <BasicForm />
         <div className={classes.actions}>
             <button className={classes['button--alt']} onClick={props.onHideCart}>Close</button>
             {hasItems && <button className={classes.button}>Order</button>}

@@ -1,14 +1,11 @@
+import styles from './SimpleInput.module.css'
+
 const SimpleInput = (props) => {
   return (
-    <form>
-      <div className='form-control'>
-        <label htmlFor='name'>Your Name</label>
-        <input type='text' id='name' />
+      <div className={styles.form}>
+        <label htmlFor={props.id}>{props.label}</label>
+        <input type={props.type} id={props.id} />
       </div>
-      <div className="form-actions">
-        <button>Submit</button>
-      </div>
-    </form>
   );
 };
 

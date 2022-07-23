@@ -33,47 +33,54 @@ import useHttp from '../Hooks/use-http';
 
 const AvialableMeals = () => {
 
-    const [meals, setMeals] = useState([])
+  const [meals, setMeals] = useState([])
 
-    const { isLoading, error, sendRequest: fetchMeals } = useHttp()
+  const { isLoading, error, sendRequest: fetchMeals } = useHttp()
 
-    const applyMeals = (meals) => {
+  const applyMeals = (meals) => {
 
-      const loadedMeals = [];
+    const loadedMeals = [];
 
-      for(const key in meals){
-        loadedMeals.push({
-          id:key,
-          name: meals[key].name,
-          description: meals[key].description,
-          price: meals[key].price
-        })
-      }
-      setMeals(loadedMeals)
+    for(const key in meals){
+      loadedMeals.push({
+        id:key,
+        name: meals[key].name,
+        description: meals[key].description,
+        price: meals[key].price
+      })
     }
+    setMeals(loadedMeals)
+  }
 
-    useEffect(() => {
-      fetchMeals(
-        {url: 'https://react---udemy-default-rtdb.firebaseio.com/Meals.json'},
-        applyMeals)
-  }, [])
+  useEffect(() => {
+    fetchMeals(
+      {url: 'https://react---udemy-default-rtdb.firebaseio.com/Meals.json'},
+      applyMeals)
+  }, [fetchMeals])
 
-    const mealItem = meals.map(item => 
-        <MealItem 
-          id={item.id}
-          key={item.id} 
-          title={item.name}
-          description={item.description}
-          price={item.price}
-    />)
+  const mealItem = meals.map(item => 
+      <MealItem 
+        id={item.id}
+        key={item.id} 
+        title={item.name}
+        description={item.description}
+        price={item.price}
+  />)
 
-    if(isLoading){
-      return (
-        <Card>
-          <p>Is Loading...</p>
-        </Card>
-      )
-    }
+  if(isLoading){
+    return (
+      <Card>
+        <p>Is Loading...</p>
+      </Card>
+    )
+  }
+  if(error){
+    return(
+      <Card>
+        <p>{error}</p>
+      </Card>
+    )
+  }
   return (
     <div className={classes.meals}>
        <Card>{mealItem}</Card>

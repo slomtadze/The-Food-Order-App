@@ -3,7 +3,7 @@ import styles from './SimpleInput.module.css'
 
 const SimpleInput = (props) => {
 
-  const style = props.inputIsInvalid ? `${styles.form} ${styles.invalid}` : styles.form; 
+  const style = !props.inputIsInvalid ? styles.form : `${styles.form} ${styles.invalid}`; 
 
 
 

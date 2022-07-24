@@ -19,6 +19,7 @@ const BasicForm = (props) => {
     inputIsInvalid: nameInputIsInvalid, 
     onChangeHandler: nameChangeHandler,
     onBlurHandler: nameBlurtHandler,
+    onSubmitHandler: onNameSubmit,
     reset: nameReset 
   } = useInput(textValidate)
   const { 
@@ -27,18 +28,24 @@ const BasicForm = (props) => {
     inputIsInvalid: lastNameInputIsInvalid, 
     onChangeHandler: lastNameChangeHandler,
     onBlurHandler: lastNameBlurtHandler,
+    onSubmitHandler: onLastNameSubmit,
     reset: lastNameReset 
   } = useInput(textValidate)
 
-  const {    
-    isLoading: sendRequestIsLoading,
-    error, sendRequestError,
-    sendRequest: setMeals} = useHttp()
-
-  let formIsValid = false;
+  const { 
+    error: postRequestError,
+    sendRequest: setMeals
+  } = useHttp()
 
   const orderSubmitHandler = event => {
     event.preventDefault();
+
+    onNameSubmit();
+    onLastNameSubmit();
+
+    if(!enteredLastNameIsValid && !enteredNameIsValid){ 
+      return
+    }
 
     setMeals({
       url:'https://react---udemy-default-rtdb.firebaseio.com/selectedMeals.json',
@@ -53,10 +60,14 @@ const BasicForm = (props) => {
       header: {'Content-Type': 'aplication/json'}
     })
 
+    if(postRequestError){
+      return <p>{postRequestError}</p>
+    }
+
     nameReset();
     lastNameReset();
-
     cartCtx.resetItems()
+    props.onHideCart()
   }
 
   return (

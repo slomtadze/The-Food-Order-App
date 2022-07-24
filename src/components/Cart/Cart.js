@@ -38,7 +38,7 @@ const Cart = (props) => {
             <span>Total Amount</span>
             <span>{totalAmount}</span>
         </div>
-        <BasicForm />
+        <BasicForm onHideCart={props.onHideCart}/>
         <div className={classes.actions}>
             <button className={classes['button--alt']} onClick={props.onHideCart}>Close</button>
             {hasItems && <button className={classes.button}>Order</button>}

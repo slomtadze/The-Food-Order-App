@@ -1,9 +1,7 @@
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import styles from './SimpleInput.module.css'
 
 const SimpleInput = (props) => {
-
-  const [error, setError] = useState(false)
 
   const style = props.inputIsInvalid ? `${styles.form} ${styles.invalid}` : styles.form; 
 

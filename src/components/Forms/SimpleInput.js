@@ -1,10 +1,17 @@
+import { Fragment, useState } from 'react';
 import styles from './SimpleInput.module.css'
 
 const SimpleInput = (props) => {
 
+  const [error, setError] = useState(false)
+
   const style = props.inputIsInvalid ? `${styles.form} ${styles.invalid}` : styles.form; 
 
+
+
+
   return (
+    <Fragment>
       <div className={style}>
         <label htmlFor={props.id}>{props.label}</label>
         <input 
@@ -15,6 +22,8 @@ const SimpleInput = (props) => {
           value={props.value}
         />
       </div>
+      {props.inputIsInvalid && <p>{`Enter a valid ${props.id}`}</p>}
+    </Fragment>
   );
 };
 

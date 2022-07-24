@@ -22,3 +22,9 @@
     padding: 0.2rem;
     outline: transparent;
 }
+p {
+    margin-left: 9rem;
+    color: red;
+    font-size: small;
+    margin-top: 0;
+}
